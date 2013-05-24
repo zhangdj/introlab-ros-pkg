@@ -221,13 +221,11 @@ namespace x264_image_transport {
    		//Get scaling context...    
         sws_scale(sws_ctx_,ptr,&srcstride,0,height,encFrame_->data, encFrame_->linesize);
  
-        //int got_output = 0;
+        int got_output = 0;
         int ret = 0;
         uint8_t buffer[height * srcstride];
         
-        //Soon to be used...
-        //ret = avcodec_encode_video2(encCdcCtx_, &encodedPacket_, encFrame_, &got_output);
-        ret = avcodec_encode_video(encCdcCtx_, buffer, height * srcstride, encFrame_);
+        ret = avcodec_encode_video2(encCdcCtx_, &encodedPacket_, encFrame_, &got_output);
  
         if (ret > 0)
         {
